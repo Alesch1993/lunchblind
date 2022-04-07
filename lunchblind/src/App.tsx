@@ -10,7 +10,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { calendar, ellipse, square, triangle } from 'ionicons/icons';
+import { calendar, fastFood, settings } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -56,15 +56,15 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={calendar} />
+            <IonIcon icon={fastFood} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={calendar} />
             <IonLabel>Date</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
+            <IonIcon icon={settings} />
             <IonLabel>Einstellungen</IonLabel>
           </IonTabButton>
         </IonTabBar>
