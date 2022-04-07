@@ -33,10 +33,18 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { useEffect, useState } from 'react';
+import User from './models/user';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  const [user,setUser] = useState<User>()
+useEffect(()=>{
+  console.log('ad')
+  setUser({DisplayName:'Alexander Schopp',UserId:'1234'})
+},[])
+return (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
@@ -48,7 +56,7 @@ const App: React.FC = () => (
             <Tab2 />
           </Route>
           <Route path="/tab3">
-            <Tab3 />
+            <Tab3 user={user}/>
           </Route>
           <Route exact path="/">
             <Redirect to="/tab1" />
@@ -71,6 +79,6 @@ const App: React.FC = () => (
       </IonTabs>
     </IonReactRouter>
   </IonApp>
-);
+);}
 
 export default App;

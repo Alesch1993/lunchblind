@@ -1,11 +1,15 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import User from '../models/user';
 
 
 import './Tab3.css';
 
+interface Tab3Props {
+  user?:User|null
+}
 
 
-const Tab3: React.FC = () => {
+const Tab3: React.FC<Tab3Props> = ({user}) => {
   return (
     <IonPage>
       <IonHeader>
@@ -20,7 +24,7 @@ const Tab3: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div className='container'>
-          Test
+          {user?.DisplayName}
         </div>
       </IonContent>
     </IonPage>
