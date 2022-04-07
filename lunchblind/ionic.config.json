@@ -1,0 +1,7 @@
+{
+  "name": "lunchblind",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
