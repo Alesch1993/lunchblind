@@ -1,4 +1,4 @@
-import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar, useIonModal } from '@ionic/react';
+import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonLabel, IonPage, IonTitle, IonToolbar, useIonModal } from '@ionic/react';
 import { add} from 'ionicons/icons';
 import { useState } from 'react';
 import './Tab2.css';
@@ -43,7 +43,7 @@ const Tab2: React.FC = () => {
     setEvents(events)
     dismiss();
   };
-  const [user,s] = useState<any>({UserId:'1234'})
+  const [user] = useState<any>({UserId:'1234'})
   const [events,setEvents] = useState<any[]>([{title:'ss',subscriber:['133','23','1234']}]);
   const [present, dismiss] = useIonModal(Body,{
     saveEvent: handleDismiss,
@@ -73,7 +73,7 @@ const Tab2: React.FC = () => {
         <div className='container'>
             {events.length > 0 &&
             events.map((val,index)=>(
-              <IonCard>
+              <IonCard key={index}>
                 <IonCardHeader>
                   <IonCardSubtitle>
                     <IonBadge color="primary">{val.subscriber?.length}</IonBadge>
