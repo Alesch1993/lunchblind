@@ -42,7 +42,6 @@ const App: React.FC = () => {
   const [user,setUser] = usePersistedState<any>('user', undefined)
   const [events] = usePersistedState<any[]>('events',[])
 useEffect(()=>{
-  console.log('ad')
   setUser({DisplayName:'Alexander Schopp',UserId:'1234'})
 
 },[])

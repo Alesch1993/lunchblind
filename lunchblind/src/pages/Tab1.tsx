@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
 import { usePersistedState } from '../usePersistedState';
 import './Tab1.css';
