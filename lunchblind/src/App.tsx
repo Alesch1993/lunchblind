@@ -44,7 +44,7 @@ const App: React.FC = () => {
 useEffect(()=>{
   setUser({DisplayName:'Alexander Schopp',UserId:'1234'})
 
-},[])
+},[user])
 return (
   <IonApp>
     <IonReactRouter>
