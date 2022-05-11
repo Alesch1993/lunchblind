@@ -1,6 +1,7 @@
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonLabel, IonPage, IonTitle, IonToolbar, useIonModal } from '@ionic/react';
 import { add} from 'ionicons/icons';
 import { useState } from 'react';
+import { usePersistedState } from '../usePersistedState';
 import './Tab2.css';
 
 const Body:React.FC<{
@@ -13,7 +14,7 @@ const Body:React.FC<{
     <IonInput
     placeholder='Titel' 
     clearInput value={formData.title} 
-    onIonChange={(e)=>{setFormData((p:any)=>({...p, title:e.detail.value!}))}}>
+    onIonChange={(e)=>{setFormData({...formData, title:e.detail.value!})}}>
     </IonInput>
     <IonInput
     placeholder='Datum'
@@ -38,17 +39,30 @@ const Tab2: React.FC = () => {
     dismiss();
   }
    const handleDismiss = (formData:any) => {
-    formData.subscriber = []
-    events.push(formData);
-    setEvents(events)
+     if(events){
+      formData.subscriber = []
+      events.push(formData);
+      setEvents(events)
+     }
+   
     dismiss();
   };
-  const [user] = useState<any>({UserId:'1234'})
-  const [events,setEvents] = useState<any[]>([{title:'ss',subscriber:['133','23','1234']}]);
+  const [user] = usePersistedState<any>('user',undefined);
+  const [events, setEvents] = usePersistedState<any[]>('events',[])
   const [present, dismiss] = useIonModal(Body,{
     saveEvent: handleDismiss,
     onDismiss: handleDis,
   })
+
+  const addToEvent = (index:any) => {
+    if(events){
+      const _events = events;
+      const event = _events[index];
+      event.subscriber.push(user.UserId);
+      _events[index]= event;
+      setEvents(_events);
+    }
+  }
   
   return (
     <IonPage>
@@ -71,7 +85,7 @@ const Tab2: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div className='container'>
-            {events.length > 0 &&
+            {events && events.length > 0 &&
             events.map((val,index)=>(
               <IonCard key={index}>
                 <IonCardHeader>
@@ -83,7 +97,9 @@ const Tab2: React.FC = () => {
                   </IonCardTitle>
                   <IonCardContent>
                     <IonButtons>
-                      <IonButton disabled={val.subscriber?.find((_:any) => _ === user.UserId)}>Teilnehmen</IonButton>
+                      <IonButton 
+                      onClick={()=>addToEvent(index)}
+                      disabled={val.subscriber?.find((_:any) => _ === user.UserId)}>Teilnehmen</IonButton>
                     </IonButtons>
                   </IonCardContent>
                 </IonCardHeader>

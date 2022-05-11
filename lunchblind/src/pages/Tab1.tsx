@@ -1,17 +1,25 @@
-import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
-import { useState } from 'react';
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
+import { closeOutline } from 'ionicons/icons';
+import { usePersistedState } from '../usePersistedState';
 import './Tab1.css';
 
-const Tab1: React.FC = () => {
-  const [data,setData] = useState<string[]>([])
-  useIonViewWillEnter(() => {
-    console.log('ionViewWillEnter event fired');
-    let tempData = []
-    for (let index = 0; index < 10; index++) {
-      tempData.push(`Termin ${index}`);
+export interface Tab1Props {
+  _events:any[] | undefined,
+  user:any
+}
+
+const Tab1: React.FC<Tab1Props> = ({_events,user}) => {
+  const [events, setEvents] = usePersistedState<any[]>('events',[])
+  const removeFromEvent = (index:any) => {
+    if(events){
+      const _events = events;
+      let event = _events[index];
+      event = event.subscriber.filter((_:any) => _ !== user.UserId);
+      _events[index]= event;
+      setEvents(_events);
     }
-    setData(tempData);
-  });
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -26,11 +34,14 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div className="container">
-          {data.length > 0 &&
+          { _events && _events.length > 0 &&
             <IonList>
-              {data.map((val)=>
-              <IonItem key={val}>
-                  <IonLabel>{val}</IonLabel>
+              {_events.map((val,index)=>
+              val.subscriber.find((_:any) => _ === user.UserId) &&
+              <IonItem key={index}>
+                  <IonLabel>{val.title}</IonLabel>
+                  <IonLabel>{new Date(val.date).toLocaleDateString('de-DE')}</IonLabel>
+                  <IonButton onClick={()=>removeFromEvent(index)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
               </IonItem>
 
               )}
