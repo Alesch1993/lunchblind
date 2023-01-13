@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonDatetime, IonDatetimeButton, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from "@ionic/react";
+import { IonButton, IonButtons, IonContent, IonDatetime, IonDatetimeButton, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuButton, IonModal, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from "@ionic/react";
 import { settings } from "ionicons/icons";
 import { useState } from "react";
 
@@ -13,15 +13,31 @@ const Start:React.FC<StartProps> = ({props}) => {
     }
 
     return (
-    <IonPage>
-      <IonContent fullscreen>
+        <>
+        <IonMenu contentId="main-content">
+            <IonHeader>
+                <IonTitle>
+                    Einstellungen
+                </IonTitle>
+            </IonHeader>
+            <IonContent className="ion-padding">
+                <IonList>
+                    <IonItem routerLink="/account">
+                        <IonLabel>Account</IonLabel>
+                    </IonItem>
+                    <IonItem routerLink="/admin">
+                        <IonLabel>Verwaltung</IonLabel>
+                    </IonItem>
+                </IonList>
+            </IonContent>
+        </IonMenu>
+    <IonPage id="main-content">
+      <IonContent className="ion-padding">
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle>Start</IonTitle>
             <IonButtons slot="end">
-            <IonButton>
-                <IonIcon slot="icon-only" icon={settings}></IonIcon>
-            </IonButton>
+                <IonMenuButton></IonMenuButton>
           </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -64,6 +80,7 @@ const Start:React.FC<StartProps> = ({props}) => {
         </div>
       </IonContent>
     </IonPage>
+    </>
     )
 } 
 
