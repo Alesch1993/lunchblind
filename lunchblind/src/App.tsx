@@ -10,8 +10,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { calendar, fastFood, settings } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
+import { calendar, home, settings } from 'ionicons/icons';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
@@ -34,6 +33,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { usePersistedState } from './usePersistedState';
+import Start from './pages/Start';
 
 setupIonicReact();
 
@@ -41,13 +41,14 @@ const App: React.FC = () => {
   const [user] = usePersistedState<any>('user', undefined)
   const [events] = usePersistedState<any[]>('events',[])
 
+
 return (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/tab1">
-            <Tab1 _events={events} user={user} />
+            <Start props={null} />
           </Route>
           <Route exact path="/tab2">
             <Tab2  />
@@ -61,12 +62,12 @@ return (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={fastFood} />
+            <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon icon={calendar} />
-            <IonLabel>Date</IonLabel>
+            <IonLabel>Buchen</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
             <IonIcon icon={settings} />
