@@ -39,7 +39,6 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [user] = usePersistedState<any>('user', undefined)
-  const [events] = usePersistedState<any[]>('events',[])
 
 
 return (

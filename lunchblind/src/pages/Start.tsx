@@ -8,10 +8,6 @@ export interface StartProps {
 
 const Start:React.FC<StartProps> = ({props}) => {
     const [ressource,setRessource] = useState(null);
-    const [selectedDate,setselectedDate] = useState({
-        from:'',
-        to:''
-    })
     const onSelectRessource = (ressouce:any) => {
         setRessource(ressouce)
     }
